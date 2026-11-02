@@ -1,4 +1,4 @@
-# Activation API — Desafio Java Pleno/Sênior
+# Activation API — Desafio Java 
 
 API REST para registrar solicitações de ativação de produtos, consultar status e integrar com um provedor HTTP simulado. Projeto backend-only; não possui frontend, conforme o escopo interpretado do desafio.
 
