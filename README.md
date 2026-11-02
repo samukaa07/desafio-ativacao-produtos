@@ -169,9 +169,3 @@ Dados: API de 300 ms para 2,5 s; algumas queries de 50 ms para 1,2 s; provedor d
    - Estrutural: tirar a chamada ao provedor da transação e da requisição (`202 Accepted` + outbox + worker) e usar circuit breaker para falhar rápido quando o provedor degradar.
 7. **Confirmação:** p95/p99 de volta ao baseline (~300 ms), queries de volta a ~50 ms em `pg_stat_statements`, pool Hikari sem espera e taxa de erro normal, observados após a mudança e com volume equivalente. Criar alertas de latência por dependência para detectar recorrência.
 
-## Antes de entregar
-- Executar `mvn clean test` e `docker compose up --build` na sua máquina.
-- Validar os cenários no Swagger/Postman.
-- Revisar decisões e limitações para conseguir explicá-las na conversa técnica.
-- Fazer commits pequenos e claros; não entregar apenas um commit monolítico.
-- O projeto é uma base implementada, mas a execução local e a revisão final dos testes são necessárias antes de enviar ao recrutador.
