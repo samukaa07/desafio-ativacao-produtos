@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: activation-postgres
+    environment:
+      POSTGRES_DB: activation_db
+      POSTGRES_USER: activation
+      POSTGRES_PASSWORD: activation
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U activation -d activation_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  api:
+    build: .
+    container_name: activation-api
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/activation_db
+      DB_USER: activation
+      DB_PASSWORD: activation
+      PROVIDER_BASE_URL: http://api:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  postgres_data:
